@@ -113,6 +113,28 @@ while True:
 
 
 
+
+        # More presidential hair
+        hair = sq[30:,0:70]
+        hair = np.rot90(hair, 3)
+        hair_mask = sq_mask[30:,0:70]
+        hair_mask = np.rot90(hair_mask, 3)
+
+        hair_scale = w0 / float(hair.shape[1])
+
+        hair = cv2.resize(hair, None, fx=hair_scale, fy=hair_scale)
+
+        hair_mask = np.array(hair_mask, dtype='uint8')
+        hair_mask = cv2.resize(hair_mask, None, fx=hair_scale, fy=hair_scale)
+        hair_mask = np.array(hair_mask, dtype=bool)
+
+        hair = np.array(np.minimum((hair * 0.7) + 100, 255), dtype='uint8') # Optional
+
+        if y0 - hair.shape[0] < 0:
+            continue
+        np.copyto(frame[y0-hair.shape[0]:y0, x0:x0+hair.shape[1], :], hair, where=hair_mask)
+
+
     cv2.imshow('cam', frame)
     key = cv2.waitKey(1)
     if key != -1:
