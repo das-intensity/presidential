@@ -74,7 +74,7 @@ while True:
 
     for (x, y, w, h) in faces:
         # First augment it a little, because the original rect isn't very good
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        #cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
         x0 = x
         y0 = y
         w0 = w
@@ -91,7 +91,25 @@ while True:
         if x < 0 or x+w > frame.shape[1]:
             continue
 
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255), 2)
+        #cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255), 2)
+
+        # Make more presidential colour
+        # Get skin values
+        frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        face_hsv = frame_hsv[y:y+h, x:x+w, :]
+
+        hsv_min = np.array([0, 0, 40])
+        hsv_max = np.array([200, 120, 220])
+        face_inrange = cv2.inRange(face_hsv, hsv_min, hsv_max)
+        face_inrange = np.array([[[v, v, v] for v in row] for row in face_inrange], dtype=bool)
+        #print 'face_inrange: %s - %s' % (face_inrange.shape, face_inrange.dtype)
+
+        pres_skin = [0.2, 0.65, 1.7]
+        face_bgr = frame[y:y+h, x:x+w, :] * pres_skin
+        face_bgr = np.minimum(face_bgr, 255)
+        face_bgr = np.array(face_bgr, dtype='uint8')
+        #print 'face_bgr: %s - %s' % (face_bgr.shape, face_bgr.dtype)
+        np.copyto(frame[y:y+h, x:x+w, :], face_bgr, where=face_inrange)
 
 
 
