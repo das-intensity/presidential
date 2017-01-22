@@ -38,6 +38,14 @@ pilsq2 = Image.fromarray(pilsq2)
 
 
 
+# Load face detection cascade
+print 'loading face cascade...'
+cas_dir = '/usr/share/opencv/haarcascades/'
+cas_fname = 'haarcascade_frontalface_default.xml'
+#cas_fname = 'haarcascade_frontalface_alt.xml'
+cas = cv2.CascadeClassifier(os.path.join(cas_dir, cas_fname))
+
+
 # Webcam viewing
 print 'starting webcam...'
 cam = cv2.VideoCapture(0)
@@ -50,6 +58,42 @@ while True:
 
     # overlay the squirrel
     np.copyto(frame[-sq.shape[0]:, 0:sq.shape[1], :], sq, where=sq_mask)
+
+    frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = cas.detectMultiScale(
+            frame_gray,
+            scaleFactor=1.1,
+            minNeighbors=5,
+            minSize=(30, 30),
+            flags = cv2.CASCADE_SCALE_IMAGE
+            # v2.4 -> cv2.cv.CV_HAAR_SCALE_IMAGE
+            )
+    #print faces
+
+    #print 'frame: %s - %s' % (frame.shape, frame.dtype)
+
+    for (x, y, w, h) in faces:
+        # First augment it a little, because the original rect isn't very good
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        x0 = x
+        y0 = y
+        w0 = w
+        h0 = h
+
+
+        # Extend the box a bit
+        #y -= int(h * 0.1)
+        h += int(h * 0.3)
+        x -= int(w * 0.1)
+        w += int(w * 0.2)
+        if y < 0 or y+h > frame.shape[0]:
+            continue
+        if x < 0 or x+w > frame.shape[1]:
+            continue
+
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255), 2)
+
+
 
     cv2.imshow('cam', frame)
     key = cv2.waitKey(1)
