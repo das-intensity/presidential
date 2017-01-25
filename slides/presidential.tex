@@ -1,0 +1,96 @@
+
+\documentclass[xcolor=usenames]{beamer}
+
+\usepackage{fancyvrb}
+\usepackage{graphics}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+%\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage[normalem]{ulem} % for strikeout
+%\usepackage{verbatim} % TODO uncomment later
+%\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+	pdfauthor={Nicholas Dahm (Dr. Nick)},
+	pdfsubject={Computer Vision},
+	pdftitle={Hacking the Visual World with OpenCV},
+	pdfkeywords={OpenCV, Python}
+}
+
+\mode<presentation>
+{
+	%\usetheme{Warsaw}
+	\usetheme{Madrid}
+	%\usetheme{Torino}
+	\setbeamercovered{transparent}
+
+	\usefonttheme{serif}
+
+	% COLOURS
+	%\usecolortheme{spruce}
+	%\setbeamercolor{local structure}{fg=??} % Make everything inherit theme colours
+
+	\usecolortheme{beaver} % needs different bullet colours
+	\setbeamercolor{local structure}{fg=darkred} % Make everything inherit theme colours
+
+	%\setbeamercolor{item projected}{bg=darkred}
+	%\setbeamertemplate{enumerate items}[default]
+	%\setbeamercolor{block title}{fg=darkred}
+
+	\setbeamertemplate{navigation symbols}{}
+
+
+	\setbeamertemplate{itemize item}{$\blacktriangleright$}
+	%\setbeamertemplate{itemize subitem}{$\triangleright$}
+	\setbeamertemplate{itemize subitem}{-}
+}
+
+\AtBeginSection[]
+{
+	\begin{frame}<beamer>{}
+		\tableofcontents[currentsection,currentsubsection]
+	\end{frame}
+}
+
+\AtBeginSubsection[]
+{
+	\begin{frame}<beamer>{}
+		\tableofcontents[currentsection,currentsubsection]
+	\end{frame}
+}
+
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+
+\newcommand{\degrees}{^\circ}
+
+\newcommand{\bc}[1][0.5]{\begin{column}{#1\textwidth}}
+\newcommand{\ec}{\end{column}}
+
+\newcommand{\bci}[1][0.5]{\begin{column}{#1\textwidth} \begin{itemize}}
+\newcommand{\eci}{\end{itemize}\end{column}}
+
+\def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
+
+\title[Hacking the Visual World]{Hacking the Visual World with OpenCV}
+\subtitle{Computer Vision in Python}
+\date{January 25, 2017}
+\author[Dr. Nick]{Nicholas Dahm / Dr. Nick / Aussie Nick}
+\institute{TrademarkVision}
+\subject{Computer Vision} % PDF properties only
+
+
+\begin{document}
+%\part<presentation>{Front}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\end{document}
+
