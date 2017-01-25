@@ -4,15 +4,43 @@ F=presidential
 .PHONY: pdf ps images graphs
 
 IMGPNG=\
+	   images/face-tracking.png \
+	   images/fpv-hud.png \
+	   images/hsv.png \
+	   images/hyperspectral.png \
+	   images/mantis-shrimp-blue.png \
+	   images/mantis-shrimp-green.png \
+	   images/mantis-shrimp-red.png \
+	   images/numpy.png \
+	   images/squirrel.png \
+	   images/step-squirrels.png \
+	   images/step-webcam.png \
+	   images/step-squirrel-productions.png \
+	   images/step-face-detection.png \
+	   images/step-presidential-skin.png \
+	   images/step-presidential-hair.png \
+	   images/tmv-logo.png \
+	   images/tmv-results.png \
 
 IMGJPG=\
+	   images/camera-transformer.jpg \
+	   images/computer-eye.jpg \
+	   images/mag-hog.jpg \
+	   images/mantis-shrimp.jpg \
+	   images/nasa-robot.jpg \
+	   images/tmv-logo-hog.jpg \
+
+IMGSVG=\
+	   images/mag.svg \
+	   images/opencv.svg \
+	   images/python.svg \
 
 IMGGNU=\
 
 #IMGEPSORIG=$(IMGPNG:.png=.eps) $(IMGJPG:.png=.eps)
 #IMGEPS=$(echo "$(IMGPNG)" "$(IMGJPG)" | sed s/\.png/\.eps/g | sed s/baseimages/images/g)
 IMGEPS= \
-	$(IMGPNG:.png=.eps) $(IMGJPG:.jpg=.eps) $(IMGGNU:.gnu=.eps) \
+	$(IMGPNG:.png=.eps) $(IMGJPG:.jpg=.eps) $(IMGGNU:.gnu=.eps) $(IMGSVG:.svg=.eps) \
 	# \
 
 
@@ -61,6 +89,9 @@ images: $(IMGEPS)
 
 %.eps: %.jpg
 	convert $< `echo $@ | sed s/\.jpg/\.eps/g`
+
+%.eps: %.svg
+	convert -trim $< `echo $@ | sed s/\.svg/\.eps/g`
 	
 gnu: $(IMGGNU:.gnu=.eps)
 
