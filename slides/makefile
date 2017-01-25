@@ -104,7 +104,8 @@ clean:
 
 purge: clean
 	rm -f $F.pdf
-	for i in $(IMGPNG); do rm -f `echo $$i | sed s/\.png/\.eps/g`; done
-	for i in $(IMGJPG); do rm -f `echo $$i | sed s/\.jpg/\.eps/g`; done
+	rm -f $(IMGJPG:.jpg=.eps)
+	rm -f $(IMGPNG:.png=.eps)
 	rm -f $(IMGGNU:.gnu=.eps)
+	rm -f $(IMGSVG:.svg=.eps)
 
