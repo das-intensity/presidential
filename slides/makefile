@@ -8,8 +8,11 @@ IMGPNG=\
 	   images/fpv-hud.png \
 	   images/hsv.png \
 	   images/hyperspectral.png \
+	   images/logo_dark_transparent.png \
+	   images/logo_final.png \
 	   images/mantis-shrimp-blue.png \
 	   images/mantis-shrimp-green.png \
+	   images/mantis-shrimp-grey.png \
 	   images/mantis-shrimp-red.png \
 	   images/numpy.png \
 	   images/squirrel.png \
