@@ -102,7 +102,7 @@ gnu: $(IMGGNU:.gnu=.eps)
 	cd gnu && gnuplot < `echo $< | sed 's/gnu\///g'`
 
 clean:
-	rm -rf $F.{ps,dvi,aux,log,bbl,blg,out,nav,snm,toc} \
+	rm -rf $F.{ps,dvi,aux,log,bbl,blg,out,nav,snm,toc,vrb} \
 	texput.log \
 
 purge: clean
